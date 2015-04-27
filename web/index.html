@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Nobby Knox">
+
+    <title>Wedding Countdown</title>
+
+    <link href="countdown.css" rel="stylesheet">
+</head>
+
+<body>
+
+<h1>Uurglas van Paniek</h1>
+
+<div class="countdown-label">Tot Ons Vertrek op 2015-09-15 2AM</div>
+<div id="departure-countdown" class="countdown"></div>
+
+<div class="spacer"></div>
+
+<div class="countdown-label">Tot Die Troue op 2015-09-18 4PM</div>
+<div id="wedding-countdown" class="countdown"></div>
+
+<script src="jquery/dist/jquery.min.js"></script>
+<script src="https://raw.githubusercontent.com/mckamey/countdownjs/master/countdown.min.js"></script>
+
+<script>
+
+    setInterval(function() {
+        $("#departure-countdown").html(stringifyCountdown(countdown( new Date(2015, 9, 15, 2) )));
+        $("#wedding-countdown").html(stringifyCountdown(countdown( new Date(2015, 9, 18, 16) )));
+    }, 1000);
+
+    function stringifyCountdown(doc) {
+        var ret = '';
+
+        if (doc.years !== 0) {
+            ret += doc.years + (doc.years === 1 ? ' jaar' : ' jare');
+
+            if (doc.months - 1 > 0) {
+                ret += (doc.days > 0 ? ', ' : ' en ');
+            }
+        }
+
+        if (doc.months - 1 > 0) {
+            ret += doc.months -1 + (doc.months - 1 === 1 ? ' maand' : ' maande');
+
+            if (doc.days > 0) {
+                ret += (doc.hours > 0 ? ', ' : ' en ');
+            }
+        }
+
+        if (doc.days !== 0) {
+            ret += doc.days + (doc.days === 1 ? ' dag' : ' dae');
+
+            if (doc.hours > 0) {
+                ret += (doc.minutes > 0 ? ', ' : ' en ');
+            }
+
+        }
+
+        if (doc.hours !== 0) {
+            ret += doc.hours + (doc.hours === 1 ? ' uur' : ' ure');
+
+            if (doc.minutes > 0) {
+                ret += (doc.seconds > 0 ? ', ' : ' en ');
+            }
+        }
+
+        if (doc.minutes !== 0) {
+            ret += doc.minutes + (doc.minutes === 1 ? ' minuut' : ' minute');
+
+            if (doc.seconds !== 0) {
+                ret += ' en ';
+            }
+        }
+
+        if (doc.seconds !== 0) {
+            ret += doc.seconds + (doc.seconds === 1 ? ' sekonde' : ' sekondes');
+        }
+
+        return ret;
+    }
+
+</script>
+
+</body>
+</html>

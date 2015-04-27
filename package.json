@@ -1,0 +1,9 @@
+{
+    "name": "wedding-countdown",
+    "version": "0.0.1",
+    "author": "Nobby Knox <nobbyknox@gmail.com>",
+    "private": true,
+    "dependencies": {
+        "express": "4.12.3"
+    }
+}

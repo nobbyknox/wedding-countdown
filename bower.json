@@ -1,0 +1,12 @@
+{
+  "name": "Wedding Countdown",
+  "version": "0.0.1",
+  "authors": [
+    "Nobby Knox <nobbyknox@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "jquery": "2.1.3",
+    "moment": "2.10.2"
+  }
+}
