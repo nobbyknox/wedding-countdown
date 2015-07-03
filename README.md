@@ -1,2 +1,3 @@
 # Wedding Countdown
-A web based countdown to our wedding
+
+A silly countdown thingie to a random date.
