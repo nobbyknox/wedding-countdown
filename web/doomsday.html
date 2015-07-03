@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title>Countdown!</title>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+	<link rel="stylesheet" href="doomed-style.css">
+
+	<script type="text/javascript">
+		var end = new Date(2015, 08, 15, 02, 00, 00);
+
+		var _second = 1000;
+		var _minute = _second * 60;
+		var _hour = _minute * 60;
+		var _day = _hour * 24;
+		var timer;
+
+		var daysChart, daysLabel;
+		var hoursChart, hoursLabel;
+
+		var chartOpts = {
+		    segmentShowStroke : false,
+		    percentageInnerCutout : 70,
+		    animationSteps : 6,
+		    animationEasing : "easeOutBounce",
+		    showTooltips: false
+		};
+
+		var elements = {days:{}, hours:{}, minutes:{}, seconds:{}, millis:{}};
+        var trElem = {
+            "days": "dae",
+            "hours": "ure",
+            "minutes": "minute",
+            "seconds": "sekondes",
+            "millis": "miellies"
+        };
+
+
+		$(document).ready(function() {
+			$.each(elements, function(k, v) {
+				$("#" + k)
+					.append($("<canvas/>").css("width", "100%").css("height", "100%"))
+					.append($("<div/>").addClass("label"))
+					.append($("<div/>").addClass("unit").text(trElem[k]));
+				elements[k].chart = new Chart($("#" + k).find("canvas").get(0).getContext('2d'))
+											.Doughnut([{value: 0, color: 'rgba(0,0,0,0)'},{value: 100, color: 'rgba(220,0,0,1)'}], chartOpts);
+				elements[k].label = $("#" + k).find(".label");
+			});
+			timer = setInterval(showRemaining, (Math.random() * 30) + 50);
+			elements.millis.chart.options.percentageInnerCutout = 90;
+			elements.millis.chart.options.animation = false;
+		});
+
+		function showRemaining() {
+			var now = new Date();
+			var distance = end - now;
+
+			var days = Math.floor(distance / _day);
+			var hours = Math.floor((distance % _day) / _hour);
+			var minutes = Math.floor((distance % _hour) / _minute);
+			var seconds = Math.floor((distance % _minute) / _second);
+			var millis = Math.floor((distance % _second));
+
+			elements.days.chart.segments[0].value = 73 - days;
+			elements.days.chart.segments[1].value = days;
+			elements.days.chart.update();
+			elements.days.label.text(days);
+
+			elements.hours.chart.segments[0].value = 24 - hours;
+			elements.hours.chart.segments[1].value = hours;
+			elements.hours.chart.update();
+			elements.hours.label.text(hours);
+
+			elements.minutes.chart.segments[0].value = 60 - minutes;
+			elements.minutes.chart.segments[1].value = minutes;
+			elements.minutes.chart.update();
+			elements.minutes.label.text(minutes);
+
+			elements.seconds.chart.segments[0].value = 60 - seconds;
+			elements.seconds.chart.segments[1].value = seconds;
+			elements.seconds.chart.update();
+			elements.seconds.label.text(seconds);
+
+			elements.millis.chart.removeData(1);
+			elements.millis.chart.removeData(0);
+			var milliColours = [];
+			if (seconds % 2 == 0) {
+				milliColours.push('rgba(220,0,0,1)');
+				milliColours.push('rgba(0,0,0,0)');
+			} else {
+				milliColours.push('rgba(0,0,0,0)');
+				milliColours.push('rgba(220,0,0,1)');
+			}
+			elements.millis.chart.addData({value: 1000 - millis, color: milliColours[0]});
+			elements.millis.chart.addData({value: millis, color: milliColours[1]});
+			elements.millis.chart.update();
+			elements.millis.label.text(millis);
+		}
+	</script>
+
+</head>
+<body>
+	<div class="title">Aftel Tot Kalahari Ekspedisie</div>
+
+	<div class="counter" id="days"></div>
+	<div class="counter" id="hours"></div>
+	<div class="counter" id="minutes"></div>
+	<div class="counter" id="seconds"></div>
+	<div class="counter" id="millis"></div>
+</body>
+</html>

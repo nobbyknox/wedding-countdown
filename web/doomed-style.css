@@ -1,0 +1,40 @@
+@import url(http://fonts.googleapis.com/css?family=Russo+One);
+
+body {
+	text-align: center;
+	font-family: "Russo One", sans-serif;
+	background-color: black;
+	color: white;
+}
+
+.title {
+    padding-top: 20px;
+	position: relative;
+	text-align: center;
+	font-size: 50px;
+}
+
+.counter {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	top: 100px;
+	background: radial-gradient(ellipse at center, #400000 0%,#350000 20%,#000000 70%,#000000 100%);
+}
+
+.counter .label {
+	position: relative;
+	top: -110px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 60px;
+}
+
+.counter .unit {
+	position: relative;
+	top: -60px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 30px;
+}
